@@ -40,3 +40,40 @@
         generate_ssh_key: yes
         ssh_key_bits: 2048
         ssh_key_file: .ssh/id_rsa
+
+    - name: Create github directory
+      file:
+        path: /opt/github
+        state: directory
+
+    - name: install useful packages for network admin and home projects.
+      apt:
+        pkg:
+        - ubuntu-dev-tools
+        - build-essential
+        - net-tools
+        - clang-12 --install-suggests
+        - manpages-dev
+        - python3
+        - zlib1g-dev
+        - libncurses5-dev
+        - libgdbm-dev 
+        - libnss3-dev 
+        - libssl-dev 
+        - libreadline-dev 
+        - libffi-dev 
+        - wget
+
+    - name: install Cisco Ansible Meraki Scripts.
+      git:
+        repo: 'https://github.com/CiscoDevNet/ansible-meraki.git'
+        dest: /opt/github/
+        clone: yes
+        update: no
+
+    - name: install Cisco vs-code for DevNet practice.
+      git:
+        repo: 'https://github.com/CiscoDevNet/vs-code-iox-client.git'
+        dest: /opt/github/
+        clone: yes
+        update: no
